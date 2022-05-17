@@ -1,47 +1,40 @@
-<!DOCTYPE html>
+<?
+$con= =mysql_connet("localhost","root","");
+if (!$con)
+{
+die( 'لم يتم الاتصال' .mysql_error());
+}
+mysql_select_db("DB1" , $con);
+$res= mysql_query("SELECT * FROM NeedInfOfPerson");
+
+mysql_close($con);
+
+?>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attaa</title>
+
 </head>
 <body>
-    <form action="insert.php" method="post">
-        <input type="text" placeholder="الأسم الرباعي" /> <br />
-        <input type="text" placeholder="رقم الهوية" /><br />
-        <input type="text" placeholder="المدينة" /> <br />
-        <input type="text" placeholder="الجنسية" /><br />
-        <input type="text" placeholder="الحالة الاجتماعية" /> <br />
-        <input type="text" placeholder="المبلغ الكلي المطلوب" /><br />
-        <input type="text" placeholder="رقم حساب السداد" /> <br />
-        <button type="submit" > إرسال </button>
+<link rel="stylesheet"type="text/css"  href="table.css">
 
-       
 
-       </form>
+<table style="color:white;" border="1"align="center">
+<caption style="color:#3a6070;font-size:50px;">قائمة المحتاجين المعسرين</caption>	
+<th style="font-size:50px;"> رابط السداد </th>
+<th style="font-size:50px;">رقم حساب السداد </th>
+<th style="font-size:50px;"> المبلغ المتبقي </th>
+<th style="font-size:50px;"> المبلغ الكلي المطلوب</th>
+<th style="font-size:50px;"> الحالة الاجتماعية </th>
+<th style="font-size:50px;"> الجنسية </th>
+<th style="font-size:50px;"> المدينة </th>
+<th style="font-size:50px;"> رقم الملف </th>
+
+</table>
+
+
+  
     
-       <style>
-            
-        body{
 
-            width: 100vw;
-            height: 100vh;
-
-        justify-content: center;
-        align-items: center;   
-        display: flex;
-            
-        }
-
-        input {
-
-            padding-top: 20px;
-            border-radius: 3px;
-        }
-
-        
-
-        </style>
 </body>
 </html>

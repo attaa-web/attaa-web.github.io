@@ -1,4 +1,56 @@
-<!DOCTYPE html>
+<?
+$con= =mysql_connet("localhost","root","");
+if (!$con)
+{
+die( 'لم يتم الاتصال' .mysql_error());
+}
+mysql_select_db("DB1" , $con);
+$sqll="CREATE TABLE NeedInfOfPerson
+(
+fileID    int NOT NULL AUTO_INCREMENT,
+PRIMARY KEY (fileID),
+name        varchar(30),
+IDnum       int(10),
+City        varchar(30),
+NAtion      varchar(30),
+SoStatus      varchar(30),
+Case        varchar(30),
+AmREQ       int,
+Accnum      int
+)";
+mysql_query($con,$sqll);
+mysql_select_db("DB1" , $con);
+$sql="INSERT INTO InfofPerson (name,IDnum,City,NAtion,Status,AmReq,Accnum)
+VALUES
+('$_POST[name]','$_POST[IDnum]',$_POST[City]','$_POST[NAtion]','$_POST[Status]','$_POST[AmReq]','$_POST[Accnum]')";
+
+IF (!mysql_query($con,$sql))
+{
+die(' لم يتم اضافة البيانات ' . mysql_error());
+}
+echo "تم اضافة البيانات";
+
+mysql_close($con);
+
+mysql_select_db("DB1" , $con);
+$sql="INSERT INTO InfofPerson (name,IDnum,City,NAtion,Status,Case,AmReq,Accnum)
+VALUES
+('$_POST[name]','$_POST[IDnum]',$_POST[City]','$_POST[NAtion]','$_POST[Status]','$_POST[Case]','$_POST[AmReq]','$_POST[Accnum]')";
+
+IF (!mysql_query($con,$sql))
+{
+die(' لم يتم اضافة البيانات ' . mysql_error());
+}
+echo "تم اضافة البيانات";
+
+mysql_close($con);
+
+
+
+?>
+
+
+
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +60,7 @@
 </head>
 <body>
     
-    <form>
+    <form action="7.html" method="post">
         <input type="text" placeholder="الأسم الرباعي" /> <br />
         <input type="text" placeholder="رقم الهوية" /><br />
         <input type="text" placeholder="المدينة" /> <br />
@@ -16,7 +68,8 @@
         <input type="text" placeholder="الحالة الاجتماعية" /> <br />
         <input type="text" placeholder="الحالة المرضية" /><br />
         <input type="text" placeholder=" رقم حساب السداد للمريض" /> <br />
-        <input type="file"> <br/>
+					<input type="file" placeholder="ارفق الوثائق"/>    <br/>
+
         <button type="submit" > إرسال </button>
        
 

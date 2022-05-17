@@ -1,4 +1,44 @@
-<!DOCTYPE html>
+<?
+$con= =mysql_connet("localhost","root","");
+if (!$con)
+{
+die( 'لم يتم الاتصال' .mysql_error());
+}
+
+if ( mysql_query("CREATE TABLE DB1 " , $con))
+[
+echo " تم انشاء قاعدة البيانات " ;
+} 
+
+mysql_select_db("DB1" , $con);
+$sqll="CREATE TABLE InfofPerson
+(
+fileID    int NOT NULL AUTO_INCREMENT,
+PRIMARY KEY (fileID),
+name        varchar(30),
+IDnum       int(10),
+City        varchar(30),
+NAtion      varchar(30),
+Status      varchar(30),
+AmReq       int,
+Accnum      int
+)";
+mysql_query($con,$sqll);
+
+mysql_select_db("DB1" , $con);
+$sql="INSERT INTO InfofPerson (name,IDnum,City,NAtion,Status,AmReq,Accnum)
+VALUES
+('$_POST[name]','$_POST[IDnum]',$_POST[City]','$_POST[NAtion]','$_POST[Status]','$_POST[AmReq]','$_POST[Accnum]')";
+
+IF (!mysql_query($con,$sql))
+{
+die(' لم يتم اضافة البيانات ' . mysql_error());
+}
+echo "تم اضافة البيانات";
+
+mysql_close($con);
+?>
+
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -7,58 +47,15 @@
     <title>Attaa</title>
 </head>
 <body>
-<php 
-
-    $con= mysql_connect("localhost","root","");
-    if (!$con)
-        {
-        die (' الاتصال فشل ' . mysql_error());
-        }
-
-  if  (mysql_query("CREATED DATABASE my_dbwork" , $con))
-  {
-         echo  " البيانات قاعدة انشاء تم " ; 
-  } 
-else 
-{
-    echo "البيانات قاعدة انشاء يتم لم  " .  mysql_error();
-}
-
-$1sql ="CREATE TABLE بيانات المحتاجين
-رقم الملف               int   NOT NULL AUTO_INCREMENT, 
-PRIMAARY KEY             (رقم الملف ),
-الاسم الرباعي            varchar(30), 
-رقم الهوية              int(10),
-المدينة                 varchar(25),
-الجنسية                 varchar(20),
-الحالة الاجتماعية       varchar(6),
-المبلغ الكلي المطلوب   int(999),
-رقم حساب السداد         int(99),
-)";
-
-mysql_select_db("my_dbwork", $con);
-
-$2sql=INSERT INTO المحتاجين بيانات
-(الملف رقم , الرباعي الاسم , الهوية رقم , المدينة , الجنسية , الاجتماعية الحالة , المطلوب الكلي المبلغ , السداد حساب رقم ) VALUE
-('$_POST[ الرباعي الاسم]', '$_POST[ الهوية رقم ','$_POST [ 'المدينة' ] , '$_POST [ 'الجنسية' ] ,$_POST[' الاجتماعية الحالة ' ] ,'$_POST [ ' الكلي المطلوب المبلغ' ],'$_POST [ ' السداد رابط '])";
-
-if (!mysql_query($2sql,$con))
-{
-    die (' البيانات اضافة يتم لم '. mysql_error());
-}
-echo ' الاضافة تم ';
-
-mysql_close($con)
-php>
-<form action="insert.php" method="post">
-            <input type="text" placeholder="الأسم الرباعي" /> <br />
+<form action="5.html" method="post">
+            <input type="text" placeholder="الاسم" /> <br />
             <input type="text" placeholder="رقم الهوية" /><br />
             <input type="text" placeholder="المدينة" /> <br />
             <input type="text" placeholder="الجنسية" /><br />
             <input type="text" placeholder="الحالة الاجتماعية" /> <br />
-            <input type="text" placeholder="المبلغ الكلي المطلوب" /><br />
+            <input type="text" placeholder="المبلغ المطلوب الكلي" /><br />
             <input type="text" placeholder="رقم حساب السداد" /> <br />
-            <input type="file"> <br/>
+			<input type="file" placeholder="ارفق الوثائق"/>    <br/>
             <button type="submit" > إرسال </button>
     
            
