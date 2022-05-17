@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attaa</title>
+</head>
+<body>
+<php 
+
+    $con= mysql_connect("localhost","root","");
+    if (!$con)
+        {
+        die (' الاتصال فشل ' . mysql_error());
+        }
+
+  if  (mysql_query("CREATED DATABASE my_dbwork" , $con))
+  {
+         echo  " البيانات قاعدة انشاء تم " ; 
+  } 
+else 
+{
+    echo "البيانات قاعدة انشاء يتم لم  " .  mysql_error();
+}
+
+$1sql ="CREATE TABLE بيانات المحتاجين
+رقم الملف               int   NOT NULL AUTO_INCREMENT, 
+PRIMAARY KEY             (رقم الملف ),
+الاسم الرباعي            varchar(30), 
+رقم الهوية              int(10),
+المدينة                 varchar(25),
+الجنسية                 varchar(20),
+الحالة الاجتماعية       varchar(6),
+المبلغ الكلي المطلوب   int(999),
+رقم حساب السداد         int(99),
+)";
+
+mysql_select_db("my_dbwork", $con);
+
+$2sql=INSERT INTO المحتاجين بيانات
+(الملف رقم , الرباعي الاسم , الهوية رقم , المدينة , الجنسية , الاجتماعية الحالة , المطلوب الكلي المبلغ , السداد حساب رقم ) VALUE
+('$_POST[ الرباعي الاسم]', '$_POST[ الهوية رقم ','$_POST [ 'المدينة' ] , '$_POST [ 'الجنسية' ] ,$_POST[' الاجتماعية الحالة ' ] ,'$_POST [ ' الكلي المطلوب المبلغ' ],'$_POST [ ' السداد رابط '])";
+
+if (!mysql_query($2sql,$con))
+{
+    die (' البيانات اضافة يتم لم '. mysql_error());
+}
+echo ' الاضافة تم ';
+
+mysql_close($con)
+php>
+<form action="insert.php" method="post">
+            <input type="text" placeholder="الأسم الرباعي" /> <br />
+            <input type="text" placeholder="رقم الهوية" /><br />
+            <input type="text" placeholder="المدينة" /> <br />
+            <input type="text" placeholder="الجنسية" /><br />
+            <input type="text" placeholder="الحالة الاجتماعية" /> <br />
+            <input type="text" placeholder="المبلغ الكلي المطلوب" /><br />
+            <input type="text" placeholder="رقم حساب السداد" /> <br />
+            <input type="file"> <br/>
+            <button type="submit" > إرسال </button>
+    
+           
+   
+           </form>
+           <style>
+            
+           body{
+   
+               width: 100vw;
+               height: 100vh;
+   
+           justify-content: center;
+           align-items: center;   
+           display: flex;
+               
+           }
+   
+           input {
+   
+               padding-top: 20px;
+               border-radius: 3px;
+           }
+   
+           
+   
+           </style>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       
+    
+        
+        
+</body>
+</html>
